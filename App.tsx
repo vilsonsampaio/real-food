@@ -1,21 +1,24 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+import { useFonts } from "expo-font";
+import { Main } from "./src/Main";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { Text } from "./src/components/Text";
 
 export default function App() {
+  const [isFontsLoaded] = useFonts({
+    "Jost-400": require("./src/assets/fonts/Jost-Regular.ttf"),
+    "Jost-500": require("./src/assets/fonts/Jost-Medium.ttf"),
+    "Jost-600": require("./src/assets/fonts/Jost-SemiBold.ttf"),
+    "Jost-700": require("./src/assets/fonts/Jost-Bold.ttf"),
+  });
+
+  if (!isFontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      <Main />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
